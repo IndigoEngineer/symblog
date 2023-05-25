@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Post{% endblock %}
+
+{% block body %}
+
+    {% include "partials/_header.html.twig" %}
+
+    <div class="container mx-auto relative">
+
+        <h1 class="text-5xl text-center mt-5 mb-8">Symblog</h1>
+        <div class="flex flex-row flex-wrap justify-evenly mt-8">
+            {%  for post in posts %}
+                {% include "components/_card.html.twig" with {post:post} only %}
+            {% endfor %}
+        </div>
+        <div class="navigation flex justify-center mt-8 mb-8 ">
+            {{ knp_pagination_render(posts) }}
+        </div>
+
+    </div>
+
+    <div class="footer w-full  mx-auto flex mt-8 mb-8 bg-neutral-900 relative justify-center">
+        {% include "partials/_footer.html.twig" %}
+    </div>
+
+
+
+{% endblock %}

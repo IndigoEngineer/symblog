@@ -1,0 +1,47 @@
+
+{% if pageCount > 1 %}
+    <nav aria-label="Page navigation example">
+        <ul class="list-style-none flex">
+            {% if previous is defined %}
+                <li>
+                    <a
+                            class="pointer-events-none relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-500 transition-all duration-300 dark:text-neutral-400"
+                            href="{{ path(route, query|merge({(pageParameterName): previous})) }}"
+                    >Previous</a
+                    >
+                </li>
+            {% endif %}
+
+            {% for page in pagesInRange %}
+                {% if page != current %}
+                    <li>
+                        <a
+                                class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100  dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                                href="{{ path(route, query|merge({(pageParameterName): page})) }}"
+                        >{{ page }}</a
+                        >
+                    </li>
+                {% else %}
+                    <li aria-current=page>
+                        <a
+                                class="relative block rounded bg-primary-100 px-3 py-1.5 text-sm font-medium text-primary-700 transition-all duration-300"
+                                href="{{ path(route, query|merge({(pageParameterName): page})) }}"
+                        >{{ page }}</a
+                        >
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if next is defined %}
+                <li>
+                    <a
+                            class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                            href="{{ path(route, query|merge({(pageParameterName): next})) }}"
+                    >Next</a
+                    >
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
+
